@@ -1,5 +1,5 @@
 -- Database Creation
-CREATE DATABASE linketinder_auxiliar;
+-- CREATE DATABASE linketinder_auxiliar;
 
 
 
