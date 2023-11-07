@@ -24,7 +24,8 @@ public class BenefitService implements IBenefitService {
 
     @Override
     public Optional<Benefit> getBenefitById(int id) {
-        return repository.findById(id);
+        return repository
+                .findById(id);
     }
 
     @Override

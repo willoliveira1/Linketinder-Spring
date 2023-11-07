@@ -4,7 +4,6 @@ import br.com.linketinder.auxiliar.domain.entity.Benefit;
 import br.com.linketinder.auxiliar.exception.BenefitNotFoundException;
 import br.com.linketinder.auxiliar.service.interfaces.IBenefitService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 import static org.springframework.http.HttpStatus.*;
@@ -28,8 +27,7 @@ public class BenefitController {
     public Benefit getById(@PathVariable Integer id) {
         return service
                 .getBenefitById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(NOT_FOUND, "{benefit.not-found}"));
+                .orElseThrow(BenefitNotFoundException::new);
     }
 
     @PostMapping
@@ -44,7 +42,7 @@ public class BenefitController {
         Benefit existedBenefit = service.updateBenefit(id, benefit);
 
         if (existedBenefit == null) {
-            throw new ResponseStatusException(NOT_FOUND, "{benefit.not-found}");
+            throw new BenefitNotFoundException();
         }
     }
 
@@ -54,7 +52,7 @@ public class BenefitController {
         try {
             service.deleteBenefit(id);
         } catch (BenefitNotFoundException e) {
-            throw new ResponseStatusException(NOT_FOUND, e.getMessage());
+            throw new BenefitNotFoundException();
         }
     }
 

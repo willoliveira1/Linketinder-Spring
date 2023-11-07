@@ -4,7 +4,6 @@ import br.com.linketinder.auxiliar.domain.entity.Skill;
 import br.com.linketinder.auxiliar.exception.SkillNotFoundException;
 import br.com.linketinder.auxiliar.service.interfaces.ISkillService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 import static org.springframework.http.HttpStatus.*;
@@ -28,8 +27,7 @@ public class SkillController {
     public Skill getById(@PathVariable Integer id) {
         return service
                 .getSkillById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(NOT_FOUND, "{skill.not-found}"));
+                .orElseThrow(SkillNotFoundException::new);
     }
 
     @PostMapping
@@ -44,7 +42,7 @@ public class SkillController {
         Skill existedSkill = service.updateSkill(id, skill);
 
         if (existedSkill == null) {
-            throw new ResponseStatusException(NOT_FOUND, "{skill.not-found}");
+            throw new SkillNotFoundException();
         }
     }
 
@@ -54,7 +52,7 @@ public class SkillController {
         try {
             service.deleteSkill(id);
         } catch (SkillNotFoundException e) {
-            throw new ResponseStatusException(NOT_FOUND, e.getMessage());
+            throw new SkillNotFoundException();
         }
     }
 

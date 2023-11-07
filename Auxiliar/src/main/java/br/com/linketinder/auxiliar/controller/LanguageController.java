@@ -4,7 +4,6 @@ import br.com.linketinder.auxiliar.domain.entity.Language;
 import br.com.linketinder.auxiliar.exception.LanguageNotFoundException;
 import br.com.linketinder.auxiliar.service.interfaces.ILanguageService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 import static org.springframework.http.HttpStatus.*;
@@ -28,8 +27,7 @@ public class LanguageController {
     public Language getById(@PathVariable Integer id) {
         return service
                 .getLanguageById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(NOT_FOUND, "{language.not-found}"));
+                .orElseThrow(LanguageNotFoundException::new);
     }
 
     @PostMapping
@@ -44,7 +42,7 @@ public class LanguageController {
         Language existedLanguage = service.updateLanguage(id, language);
 
         if (existedLanguage == null) {
-            throw new ResponseStatusException(NOT_FOUND, "{language.not-found}");
+            throw new LanguageNotFoundException();
         }
     }
 
@@ -54,7 +52,7 @@ public class LanguageController {
         try {
             service.deleteLanguage(id);
         } catch (LanguageNotFoundException e) {
-            throw new ResponseStatusException(NOT_FOUND, e.getMessage());
+            throw new LanguageNotFoundException();
         }
     }
 
