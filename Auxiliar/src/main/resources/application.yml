@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/linketinder_core
+    url: jdbc:postgresql://localhost:5432/linketinder_auxiliar
     username: postgres
     password: postgres
     properties:
@@ -12,3 +12,5 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  messages:
+    basename: messages

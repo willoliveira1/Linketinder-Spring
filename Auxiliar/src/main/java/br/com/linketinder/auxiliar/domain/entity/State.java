@@ -3,8 +3,8 @@ package br.com.linketinder.auxiliar.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,16 +14,30 @@ import javax.validation.constraints.NotEmpty;
 public class State {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name", length = 25)
-    @NotEmpty(message = "{field.name.required}")
+    @Column(name = "acronym", length = 50)
+    private String acronym;
+
+    @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "acronym", length = 2)
-    @NotEmpty(message = "{field.acronym.required}")
-    private String acronym;
+//    public StateEntity() {
+//    }
+
+//    public StateEntity(String acronym, String title) {
+//        this.acronym = acronym;
+//        this.title = title;
+//    }
+//
+//    public String getAcronym() {
+//        return acronym;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
 
 }

@@ -14,12 +14,13 @@ import javax.validation.constraints.NotEmpty;
 public class Language {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @Column(name = "name", length = 50)
     @NotEmpty(message = "{field.name.required}")
     private String name;
+
 
 }
