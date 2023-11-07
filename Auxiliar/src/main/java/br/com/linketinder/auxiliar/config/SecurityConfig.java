@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+//TODO
 //    @Bean
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticated()
             .and()
                 .httpBasic();
-//                .antMatchers("/api/beneficios/**")
+//                .antMatchers("/api/beneficios/**") // TODO
 //                    .permitAll()
 
 

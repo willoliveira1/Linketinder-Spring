@@ -1,7 +1,6 @@
 package br.com.linketinder.auxiliar.util;
 
 import lombok.Getter;
-
 import java.util.Arrays;
 import java.util.List;
 
